@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Medicoin (MEDC) — Official Sale</title>
+  <meta name="description" content="Medicoin (MEDC) — a Solana community token. Buy on Moonshot with one tap.">
+  <link rel="preconnect" href="https://api.dexscreener.com">
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --card: #131a22;
+      --muted: #7f8b99;
+      --text: #e9eef5;
+      --accent: #22d3ee;
+      --accent2: #60a5fa;
+      --border: #22303d;
+      --success: #22c55e;
+      --danger: #ef4444;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif; }
+    a { color: var(--accent2); text-decoration: none; }
+    header { position: sticky; top: 0; background: rgba(11,15,20,.75); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 16px; }
+    .brand { display:flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .2px; }
+    .brand .pill { font-size: 12px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 999px; color: var(--muted); }
+    .hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 28px; padding: 36px 16px 24px; align-items: center; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; }
+    h1 { font-size: clamp(28px, 4vw, 48px); margin: 8px 0 6px; }
+    p.lead { color: var(--muted); margin-top: 0; font-size: 18px; }
+    .row { display:flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display:inline-flex; align-items:center; gap:8px; border-radius: 12px; padding: 12px 16px; font-weight: 600; border: 1px solid var(--border); background: #0e1319; color: var(--text); }
+    .btn.primary { background: linear-gradient(90deg, var(--accent2), var(--accent)); color:#0b1220; border: none; }
+    .muted { color: var(--muted); }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace; }
+    .grid { display:grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .stat { display:flex; flex-direction:column; gap:6px; border-radius: 12px; padding:14px; border:1px dashed var(--border); }
+    .copy { display:flex; gap:10px; }
+    input.contract { flex:1; background:#0b1117; color:var(--text); border:1px solid var(--border); border-radius:10px; padding:10px; }
+    .tag { font-size:12px; color:var(--muted); border:1px solid var(--border); border-radius:999px; padding:3px 8px; }
+    .howto ol { padding-left: 18px; line-height: 1.7; }
+    footer { border-top:1px solid var(--border); margin-top:36px; }
+    @media (max-width: 900px){
+      .hero { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap row" style="justify-content: space-between;">
+      <div class="brand">
+        <div style="width:34px;height:34px;border-radius:10px;background: linear-gradient(135deg, var(--accent2), var(--accent));"></div>
+        <div>Medicoin <span class="muted">(MEDC)</span></div>
+        <span class="pill">Solana</span>
+      </div>
+      <div class="row">
+        <a class="btn" href="#buy">Buy</a>
+        <a class="btn" href="#token">Token</a>
+        <a class="btn" href="#how">How to Buy</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" id="buy">
+      <div>
+        <h1>Buy Medicoin <span class="muted">(MEDC)</span> on Moonshot</h1>
+        <p class="lead">Community token on Solana with a health-focused mission. One-tap checkout via Moonshot. Always verify the contract.</p>
+
+        <div class="card">
+          <div class="copy">
+            <input id="contract" class="contract mono" value="FJrXWx6CueqkAfnVqM4kmfsJDsftRJyjCeyPdPkSmoon" readonly>
+            <button class="btn" id="copyBtn">Copy</button>
+          </div>
+          <div style="margin-top:10px" class="row">
+            <span class="tag">Ticker: MEDC</span>
+            <span class="tag">Chain: Solana</span>
+            <span class="tag">Contract Indexed: <span id="verif" class="mono">…</span></span>
+          </div>
+        </div>
+
+        <div style="margin-top:14px" class="row">
+          <a class="btn primary" id="buyBtn" href="https://moonshot.com/FJrXWx6CueqkAfnVqM4kmfsJDsftRJyjCeyPdPkSmoon?ref=cI7c3r" target="_blank" rel="noopener">Buy MEDC on Moonshot</a>
+          <a class="btn" id="chartBtn" href="#" target="_blank" rel="noopener">Open on DexScreener</a>
+          <a class="btn" href="https://medicoin.org" target="_blank" rel="noopener">Website</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin:0 0 8px">Live Market (auto)</h3>
+        <div class="grid">
+          <div class="stat"><span class="muted">Price (USD)</span><strong id="price">—</strong></div>
+          <div class="stat"><span class="muted">24h Change</span><strong id="change">—</strong></div>
+          <div class="stat"><span class="muted">24h Volume</span><strong id="vol">—</strong></div>
+        </div>
+        <p class="muted" style="margin-top:10px">If data is missing, the pair may not be listed yet. It will populate automatically once indexed by DEX trackers.</p>
+      </div>
+    </section>
+
+    <section class="grid" id="token">
+      <div class="card">
+        <h3 style="margin:0 0 10px">Token Utility</h3>
+        <ul>
+          <li>Staking & community rewards</li>
+          <li>Access to member tools and drops</li>
+          <li>Community governance</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 10px">Tokenomics (sample)</h3>
+        <ul class="muted">
+          <li>Liquidity: 40%</li>
+          <li>Ecosystem/Staking: 25%</li>
+          <li>Marketing: 10%</li>
+          <li>Team (vested): 10%</li>
+          <li>Airdrop/Community: 10%</li>
+          <li>Reserve: 5%</li>
+        </ul>
+        <p class="muted">Replace with your final allocation once confirmed.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 10px">Safety</h3>
+        <ul>
+          <li>Always verify the contract address</li>
+          <li>Never share seed phrases</li>
+          <li>DYOR — This is not financial advice</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card howto" id="how" style="margin-top:20px">
+      <h3 style="margin:0 0 10px">How to Buy MEDC on Moonshot</h3>
+      <ol>
+        <li>Install a Solana wallet (Phantom/Solflare).</li>
+        <li>Fund with SOL or USDC.</li>
+        <li>Click “Buy MEDC on Moonshot” (uses your referral link).</li>
+        <li>Paste the contract if needed and confirm the swap.</li>
+      </ol>
+      <p class="muted">Referral: <span class="mono">https://moonshot.com/FJrXWx6CueqkAfnVqM4kmfsJDsftRJyjCeyPdPkSmoon?ref=cI7c3r</span></p>
+    </section>
+
+    <section class="card" style="margin-top:20px">
+      <h3 style="margin:0 0 10px">Disclaimers</h3>
+      <p class="muted">Crypto involves risk. Prices are volatile. Nothing here is investment advice. Always verify contract details and use official links.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap row" style="justify-content: space-between; align-items: center; padding: 14px 16px;">
+      <div class="muted">© <span id="year"></span> Medicoin. All rights reserved.</div>
+      <div class="row muted" style="gap: 8px;">
+        <a href="https://moonshot.com/FJrXWx6CueqkAfnVqM4kmfsJDsftRJyjCeyPdPkSmoon?ref=cI7c3r" target="_blank" rel="noopener">Moonshot</a>
+        <span>•</span>
+        <a href="https://medicoin.org" target="_blank" rel="noopener">Website</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  const contract = "FJrXWx6CueqkAfnVqM4kmfsJDsftRJyjCeyPdPkSmoon";
+  const chartBtn = document.getElementById('chartBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const year = document.getElementById('year');
+  const priceEl = document.getElementById('price');
+  const changeEl = document.getElementById('change');
+  const volEl = document.getElementById('vol');
+  const verifEl = document.getElementById('verif');
+
+  year.textContent = new Date().getFullYear();
+
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(contract);
+      copyBtn.textContent = 'Copied';
+      setTimeout(() => (copyBtn.textContent = 'Copy'), 1200);
+    } catch {
+      copyBtn.textContent = 'Copy failed';
+    }
+  });
+
+  async function loadData() {
+    try {
+      const url = `https://api.dexscreener.com/latest/dex/tokens/${contract}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('no data');
+      const json = await res.json();
+      const p = json?.pairs?.[0];
+      if (!p) throw new Error('no pair');
+      priceEl.textContent = '$' + Number(p.priceUsd).toFixed(6);
+      const ch = Number(p.priceChange?.h24 || 0);
+      changeEl.textContent = (ch > 0 ? '+' : '') + ch.toFixed(2) + '%';
+      changeEl.style.color = ch >= 0 ? 'var(--success)' : 'var(--danger)';
+      volEl.textContent = '$' + Number(p.volume?.h24 || 0).toLocaleString();
+      chartBtn.href = p.url || `https://dexscreener.com/solana/${p.pairAddress}`;
+      verifEl.textContent = 'Indexed';
+    } catch (e) {
+      priceEl.textContent = 'Coming soon';
+      changeEl.textContent = '—';
+      volEl.textContent = '—';
+      chartBtn.href = `https://dexscreener.com/solana/${contract}`;
+      verifEl.textContent = 'Pending';
+    }
+  }
+  loadData();
+  </script>
+</body>
+</html>
